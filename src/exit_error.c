@@ -6,13 +6,18 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:29:09 by hlichten          #+#    #+#             */
-/*   Updated: 2025/03/16 15:41:50 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/03/19 19:07:15 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_error()
-{
-	;
-}
+// void	ft_error()
+// {
+// 	;
+// }
+
+// void free_tab()
+// {
+// 	;
+// }

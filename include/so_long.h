@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 14:59:51 by hlichten          #+#    #+#             */
-/*   Updated: 2025/03/16 22:43:01 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/03/19 19:08:37 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,26 @@
 
 typedef	struct	s_inputs
 {
-	char	*pathname;
 	int		fd;
-	char		*line;
+	char	*line;
+	int		check_p;
+	int		check_e;
+	int		check_c;
 }	t_inputs;
 
 typedef	struct	s_map
 {
-	int	col;
-	int	row;
-	char **map;
+	int	col; // nb de colonnes -> strlen de la string
+	int	check;
+	int	row; //nb de lignes
+	char **map_tab;
 }	t_map;
 
 typedef	struct	s_graphic
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	//voir photo 16.03 pour si besoin
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img_ptr;
 }	t_graphic;
 
 typedef	struct	s_mlx
@@ -50,6 +52,14 @@ typedef	struct	s_mlx
 }	t_mlx;
 
 
+int	last_check(t_mlx *mlx);
+int check_wall(t_mlx *mlx);
+int	check_count(t_mlx *mlx);
+//int check_path(t_mlx *mlx);
 int	is_ber(char *arg, char *compaare);
+int	first_check(t_mlx  *mlx, char *arg);
+int	check_char(char *arg, t_inputs *inputs, int col);
+int	is_rectangle(t_inputs *inputs, int col, int check);
+
 
 #endif

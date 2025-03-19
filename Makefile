@@ -25,6 +25,10 @@ CC = gcc
 CFLAGS = -g3 -Wall -Wextra -Werror
 INCLUDE = -I include -I $(MLXDIR)
 
+ifeq ($(DEBUG), 1)
+	CFLAGS += -fsanitize=address
+endif
+
 RM = rm -f 
 
 vpath %.c \
@@ -35,7 +39,7 @@ vpath %.c \
 	# $(SRCDIR)/commands
 
 # Sources and object files
-SRC = so_long.c checks.c
+SRC = so_long.c first_checks.c last_checks.c
 OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
 all: $(LIBFT) $(PRINTF) $(MLX) $(NAME)
