@@ -39,7 +39,7 @@ vpath %.c \
 	# $(SRCDIR)/commands
 
 # Sources and object files
-SRC = so_long.c first_checks.c last_checks.c
+SRC = so_long.c first_checks.c last_checks.c mallocs_free_error.c
 OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
 all: $(LIBFT) $(PRINTF) $(MLX) $(NAME)

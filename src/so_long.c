@@ -6,36 +6,11 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:01:14 by hlichten          #+#    #+#             */
-/*   Updated: 2025/03/19 19:07:39 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/03/19 21:53:21 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-void	malloc_map(char *arg, t_mlx *mlx)
-{
-	int	i;
-
-	i = 0;
-	mlx->map.map_tab = malloc(sizeof(char *) * (mlx->map.row + 1));
-	if (!mlx->map.map_tab)
-		return (perror("Error: malloc failed"));
-	mlx->inputs.fd = open(arg, O_RDONLY);
-	if(mlx->inputs.fd == -1)
-		return (ft_putstr_fd("Error : incorrect fd\n", 2));
-	while(i < mlx->map.row)
-	{
-		mlx->inputs.line = get_next_line(mlx->inputs.fd);
-		if (mlx->inputs.line == NULL)
-			break;
-		mlx->map.map_tab[i] = ft_strndup(mlx->inputs.line, mlx->map.col);
-		printf("%s\n", mlx->map.map_tab[i]); // test a supprimer
-		free (mlx->inputs.line);
-		i++;
-	}
-	mlx->map.map_tab[i] = NULL;
-	close(mlx->inputs.fd);
-}
 
 void	mlx_init(t_mlx *mlx)
 {
@@ -52,6 +27,17 @@ void	mlx_init(t_mlx *mlx)
 	mlx->graphic.img_ptr = 0;
 }
 
+int	last_check(t_mlx *mlx)
+{
+	if (check_wall(mlx) == 1)
+		return (ft_putstr_fd("Error : incorrect walls\n", 2), 1);
+	printf ("test walls ok\n");
+	pos_player(mlx);
+	if (check_path(mlx) == 1)
+		return (ft_putstr_fd("Error : incorrect paths\n", 2), 1);
+	printf ("test path ok\n");
+	return (0);
+}
 
 int	main(int ac, char **av)
 {
@@ -66,21 +52,20 @@ int	main(int ac, char **av)
 			return (ft_putstr_fd("Error : incorrect element\n", 2), 1);
 		close(mlx.inputs.fd);
 		malloc_map(av[1], &mlx);
+		printf ("test mallocs\n");
 		if (last_check(&mlx) == 1)
 			{
-				//free_tab(); //creer fonction
+				free_tab(&mlx, mlx.map.map_tab);
 				return (ft_putstr_fd("Error : incorrect map\n", 2), 1);
 			}
 		else {} 
 			//lets gooooooooooooo;
 
-
-
-
 	}
 	return (0);
 }
 
+		// si on veut vraiment etre propore fair eune fonction qui free les malloc des 2 strdup et ndup
 
 		// n * 16 (ou taille de tile);
 		//refresh texture la ou le joeur va. 

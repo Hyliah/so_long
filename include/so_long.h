@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 14:59:51 by hlichten          #+#    #+#             */
-/*   Updated: 2025/03/19 19:08:37 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/03/19 20:46:29 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,20 @@ typedef	struct	s_inputs
 	int		check_c;
 }	t_inputs;
 
+typedef struct s_player
+{
+	int	pos_x;
+	int pos_y;
+
+}	t_player;
+
 typedef	struct	s_map
 {
-	int	col; // nb de colonnes -> strlen de la string
-	int	check;
-	int	row; //nb de lignes
-	char **map_tab;
+	int			col; // nb de colonnes -> strlen de la string
+	int			check;
+	int			row; //nb de lignes
+	char 		**map_tab;
+	t_player	player;
 }	t_map;
 
 typedef	struct	s_graphic
@@ -52,14 +60,22 @@ typedef	struct	s_mlx
 }	t_mlx;
 
 
+char	**cpy_map(t_mlx *mlx);
+char	**free_tab(t_mlx *mlx, char **tab);
+char	**free_mid_tab(char **strs, int i);
+
+void	pos_player(t_mlx *mlx);
+void	malloc_map(char *arg, t_mlx *mlx);
+
+int	check_path(t_mlx *mlx);
 int	last_check(t_mlx *mlx);
 int check_wall(t_mlx *mlx);
 int	check_count(t_mlx *mlx);
-//int check_path(t_mlx *mlx);
+int	check_count(t_mlx *mlx);
 int	is_ber(char *arg, char *compaare);
 int	first_check(t_mlx  *mlx, char *arg);
+int	rec_count(char **map_tab, int x, int y, char c);
 int	check_char(char *arg, t_inputs *inputs, int col);
 int	is_rectangle(t_inputs *inputs, int col, int check);
-
 
 #endif

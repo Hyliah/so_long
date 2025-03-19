@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 16:34:10 by hlichten          #+#    #+#             */
-/*   Updated: 2025/03/19 19:05:42 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/03/19 21:59:53 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,28 +41,79 @@ int	check_wall(t_mlx *mlx)
 	return (0);
 }
 
-// int check_path(char *mlx) // flood_fill
-// {
+void	pos_player(t_mlx *mlx)
+{
+	int x;
+	int y;
 
-// 	return (0);
-// }
+	y = 0;
+	while(y < mlx->map.row)
+	{
+		x = 0;
+		while (x < mlx->map.col)
+		{
+			if (mlx->map.map_tab[y][x] == 'P')
+				{
+					mlx->map.player.pos_x = x;
+					mlx->map.player.pos_y = y;
+				}
+			x++;
+		}
+		y++;
+	}
+}
 
+int check_path(t_mlx *mlx)
+{
+	int	check_c;
+	int	check_e;
+	int	x;
+	int	y;
+	char **new_map;
+
+	x = mlx->map.player.pos_x;
+	y = mlx->map.player.pos_y;
+
+	printf ("x1 = %d\n", x);
+	printf ("y1 = %d\n", y);
+	
+	new_map = cpy_map(mlx);
+	check_c = rec_count(new_map, x, y, 'C');
+	free_tab(mlx, new_map);
+	new_map = cpy_map(mlx);
+	check_e = rec_count(new_map, x, y, 'E');
+	free_tab(mlx, new_map);
+	if (check_e != 1)
+		return (1);
+	if (check_c != mlx->inputs.check_c)
+		return (1);
+	return (0);
+}
+
+int	rec_count(char **map_tab, int x, int y, char c)
+{
+	static int count = 0;
+
+	if (map_tab[y][x] == '1' || map_tab[y][x] == '*')
+		return (count);
+	if (map_tab[y][x] == c)
+		count++;
+	if (map_tab[y][x] != '1')
+		map_tab[y][x] = '*';
+	rec_count(map_tab, x + 1, y, c); // droite
+	rec_count(map_tab, x - 1, y, c); // gauche
+	rec_count(map_tab, x, y + 1, c); // bas
+	rec_count(map_tab, x, y - 1, c);
+	return (count);
+}
 
 int	check_count(t_mlx *mlx)
 {
 	if (mlx->inputs.check_c < 1)
 		return (0);
-	else if (mlx->inputs.check_p != 1)
+	if (mlx->inputs.check_p != 1)
 		return (0);
 	if (mlx->inputs.check_e != 1)
 		return (0);
 	return (1);
-}
-
-int	last_check(t_mlx *mlx)
-{
-	//check_path(&mlx); // creer fonction
-	if (check_wall(mlx) == 1)
-		return (ft_putstr_fd("Error : incorrect walls\n", 2), 1);
-	return (0);
 }
