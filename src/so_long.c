@@ -6,13 +6,13 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:01:14 by hlichten          #+#    #+#             */
-/*   Updated: 2025/03/21 17:47:15 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/03/21 19:09:40 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	mlx_init(t_mlx *mlx)
+void	mlx_init_sl(t_mlx *mlx)
 {
 	mlx->map.col = 0;
 	mlx->map.row = 1;
@@ -41,7 +41,7 @@ int	main(int ac, char **av)
 {
 	t_mlx	mlx;
 
-	mlx_init(&mlx);
+	mlx_init_sl(&mlx);
 	if (ac == 2)
 	{
 		if (first_check(&mlx, av[1]) == 1)
@@ -51,13 +51,8 @@ int	main(int ac, char **av)
 		close(mlx.inputs.fd);
 		malloc_map(av[1], &mlx);
 		if (last_check(&mlx) == 1)
-		{
-			free_tab(&mlx, mlx.map.map_tab);
-			return (1);
-		}
-		else
-		{
-		}
+			return (free_tab(&mlx, mlx.map.map_tab), 1);
+		create_visual();
 	}
 	return (0);
 }

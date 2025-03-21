@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 14:59:51 by hlichten          #+#    #+#             */
-/*   Updated: 2025/03/21 17:51:15 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/03/21 19:37:02 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@
 # include <fcntl.h>
 # include "ft_printf.h"
 # include "libft.h"
+# include "mlx.h"
+# include "mlx_int.h"
 
-typedef struct s_inputs
+typedef struct s_graphic
 {
-	int		fd;
-	char	*line;
-	int		check_p;
-	int		check_e;
-	int		check_c;
-}	t_inputs;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	void	*img_ptr;
+}	t_graphic;
 
 typedef struct s_player
 {
@@ -45,12 +45,14 @@ typedef struct s_map
 	t_player	player;
 }	t_map;
 
-typedef struct s_graphic
+typedef struct s_inputs
 {
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void	*img_ptr;
-}	t_graphic;
+	int		fd;
+	char	*line;
+	int		check_p;
+	int		check_e;
+	int		check_c;
+}	t_inputs;
 
 typedef struct s_mlx
 {
@@ -65,16 +67,16 @@ char	**free_mid_tab(char **strs, int i);
 
 void	pos_player(t_mlx *mlx);
 void	malloc_map(char *arg, t_mlx *mlx);
-
+void	create_visual(void);
 int		check_path(t_mlx *mlx);
 int		last_check(t_mlx *mlx);
 int		check_wall(t_mlx *mlx);
 int		check_count(t_mlx *mlx);
 int		check_count(t_mlx *mlx);
+int		clean_exit(t_graphic *graphic);
 int		is_ber(char *arg, char *compaare);
 int		first_check(t_mlx *mlx, char *arg);
 int		rec_count(char **map_tab, int x, int y, char c);
 int		check_char(char *arg, t_inputs *inputs, int col);
 int		is_rectangle(t_inputs *inputs, int col, int check);
-
 #endif
