@@ -35,11 +35,11 @@ vpath %.c \
 	$(SRCDIR) \
 	$(SRCDIR)/maps \
 	$(SRCDIR)/parsing \
-	# $(SRCDIR)/utils \
+	$(SRCDIR)/mallocs_free_error \
 	# $(SRCDIR)/commands
 
 # Sources and object files
-SRC = so_long.c first_checks.c last_checks.c mallocs_free_error.c
+SRC = so_long.c first_checks.c last_checks.c mallocs.c free.c errors.c
 OBJS = $(addprefix $(OBJDIR)/, $(SRC:.c=.o))
 
 all: $(LIBFT) $(PRINTF) $(MLX) $(NAME)

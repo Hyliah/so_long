@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 19:03:17 by hlichten          #+#    #+#             */
-/*   Updated: 2025/03/19 19:04:56 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/03/21 17:46:42 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ int	is_ber(char *arg, char *compaare)
 
 	i = 0;
 	len = ft_strlen(arg) - 4;
-
-	while(i < 4)
+	while (i < 4)
 	{
 		if (arg[len] == compaare[i])
 		{
@@ -35,14 +34,14 @@ int	is_ber(char *arg, char *compaare)
 
 int	check_char(char *arg, t_inputs *inputs, int col)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < col)
 	{
 		if (arg[i] != '1' && arg[i] != '0' && arg[i] != 'C'
-				&& arg[i] != 'E' && arg[i] != 'P')
-			return(0);
+			&& arg[i] != 'E' && arg[i] != 'P')
+			return (0);
 		if (arg[i] == 'E')
 			inputs->check_e++;
 		if (arg[i] == 'P')
@@ -68,10 +67,10 @@ int	is_rectangle(t_inputs *inputs, int col, int check)
 	return (0);
 }
 
-int	first_check(t_mlx  *mlx, char *arg)
+int	first_check(t_mlx *mlx, char *arg)
 {
 	mlx->inputs.fd = open(arg, O_RDONLY);
-	if(mlx->inputs.fd == -1)
+	if (mlx->inputs.fd == -1)
 		return (ft_putstr_fd("Error : incorrect fd\n", 2), 1);
 	if (!(is_ber(arg, ".ber")))
 		return (ft_putstr_fd("Error : incorrect file\n", 2), 1);
@@ -86,14 +85,13 @@ int	first_check(t_mlx  *mlx, char *arg)
 	{
 		mlx->inputs.line = get_next_line(mlx->inputs.fd);
 		if (mlx->inputs.line == NULL)
-			break;
+			break ;
 		mlx->map.check = ft_strlen(mlx->inputs.line);
-		if (is_rectangle(&mlx->inputs, mlx->map.col, mlx->map.check) && 
-			(!check_char(mlx->inputs.line, &mlx->inputs, mlx->map.col)))
+		if (is_rectangle(&mlx->inputs, mlx->map.col, mlx->map.check)
+			&& (!check_char(mlx->inputs.line, &mlx->inputs, mlx->map.col)))
 			return (ft_putstr_fd("Error : incorrect map\n", 2), 1);
 		mlx->map.row++;
 		free(mlx->inputs.line);
 	}
 	return (0);
 }
-

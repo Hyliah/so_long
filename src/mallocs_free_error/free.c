@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/16 17:01:50 by hlichten          #+#    #+#             */
-/*   Updated: 2025/03/21 17:51:39 by hlichten         ###   ########.fr       */
+/*   Created: 2025/03/21 17:05:42 by hlichten          #+#    #+#             */
+/*   Updated: 2025/03/21 17:24:34 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-char	*ft_strjoin_free(char *s1, char *s2)
+char	**free_mid_tab(char **strs, int i)
 {
-	size_t	len_s1;
-	size_t	len_s2;
-	char	*str;
-
-	if (!s2)
-		return (NULL);
-	if (s1)
-		len_s1 = ft_strlen(s1);
-	else
-		len_s1 = 0;
-	len_s2 = ft_strlen(s2);
-	str = (char *) malloc(sizeof(char) * (len_s1 + len_s2 + 1));
-	if (!str)
-		return (NULL);
-	if (s1)
+	while (i > 0)
 	{
-		ft_strlcpy(str, s1, len_s1 + 1);
-		free(s1);
+		i--;
+		free (strs[i]);
 	}
-	ft_strlcpy(str + len_s1, s2, len_s2 + 1);
-	return (str);
+	free(strs);
+	return (NULL);
+}
+
+char	**free_tab(t_mlx *mlx, char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (i < mlx->map.row)
+	{
+		free (tab[i]);
+		i++;
+	}
+	free(tab);
+	return (NULL);
 }
