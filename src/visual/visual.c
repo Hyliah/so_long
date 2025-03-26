@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 18:29:08 by hlichten          #+#    #+#             */
-/*   Updated: 2025/03/26 15:55:41 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/03/26 18:56:16 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,5 @@ void	create_window(t_mlx *mlx)
 	mlx->graphic.mlx_ptr = mlx_init();
 	mlx->graphic.win_ptr = mlx_new_window(mlx->graphic.mlx_ptr, x, y, "Poups");
 	create_board(&mlx->graphic, &mlx->map);
-	mlx_hook(mlx->graphic.win_ptr, 17, 0, clean_exit, &mlx);
+	mlx_hook(mlx->graphic.win_ptr, 17, 0, clean_exit, mlx);
 }

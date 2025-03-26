@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:13:30 by hlichten          #+#    #+#             */
-/*   Updated: 2025/03/26 18:09:29 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/03/26 19:05:16 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,30 @@ int	handle_key(int keycode, t_mlx *mlx)
 		clean_exit(mlx);
 	return (0);
 }
+
 void	count_move(void)
 {
-	static int count = 0;
+	static int	count = 1;
 
+	if (count == 1)
+		ft_printf("Waf waf %d step, I want my treats 🐷\n", count);
+	else if (count == 10)
+		ft_printf("Waf waf I already walked : %d steps 👟\n", count);
+	else if (count == 21)
+		ft_printf("Waf waf I am tired of walking %d steps 😪\n", count);
+	else if (count == 42)
+		ft_printf("Waf waf nice ! I did : %d steps, strong boy 💪\n", count);
+	else
+		ft_printf("I walked : %d steps\n", count);
+	count++;
 }
+
+void	need_message(void)
+{
+	count_move();
+	ft_printf("Waf waf I found my Mum 💖\n");
+}
+
 void	will_move(t_mlx *mlx, int new_x, int new_y)
 {
 	if (mlx->map.map_tab[new_y][new_x] != '1')
@@ -40,6 +59,7 @@ void	will_move(t_mlx *mlx, int new_x, int new_y)
 			mlx->map.map_tab[new_y][new_x] = '0';
 			move_player(mlx, new_x, new_y);
 			mlx->inputs.collected++;
+			ft_printf("Num num num treats 🦴\n");
 		}
 		if (mlx->map.map_tab[new_y][new_x] == '0'
 			|| mlx->map.map_tab[new_y][new_x] == 'P')
@@ -47,14 +67,15 @@ void	will_move(t_mlx *mlx, int new_x, int new_y)
 		if (mlx->map.map_tab[new_y][new_x] == 'E')
 		{
 			if (mlx->inputs.collected == mlx->inputs.check_c)
-				clean_exit(mlx);
-			else
 			{
-				move_player(mlx, new_x, new_y);
-				return ;
+				need_message();
+				clean_exit(mlx);
 			}
+			else
+				return (count_move(), ft_printf("Need more treats\n"),
+					move_player(mlx, new_x, new_y));
 		}
-		//cnt++;
+		count_move();
 	}
 }
 
