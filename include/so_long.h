@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 14:59:51 by hlichten          #+#    #+#             */
-/*   Updated: 2025/03/26 15:56:25 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:12:10 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 # include "mlx.h"
 # include "keycodes.h"
 
+# define ERR_FI	"Error : non valid file\n"
+# define ERR_PA	"Error : non valid path\n"
+# define ERR_DB	"Error : non valid number of player, collectible or exit\n"
+# define ERR_MA	"Error : non valid map\n"
+# define ERR_FD	"Error : non valid file desctriptor\n"
+# define ERR_CH	"Error : non valid character\n"
 # define WA "./src/images/SL_1.xpm"
 # define PA "./src/images/SL_0.xpm"
 # define PL "./src/images/SL_Player.xpm"

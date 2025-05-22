@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 19:03:17 by hlichten          #+#    #+#             */
-/*   Updated: 2025/03/26 15:49:52 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:13:05 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,15 @@ int	first_check(t_mlx *mlx, char *arg)
 {
 	mlx->inputs.fd = open(arg, O_RDONLY);
 	if (mlx->inputs.fd == -1)
-		return (ft_putstr_fd("Error\n", 2), 1);
+		return (ft_putstr_fd(ERR_FD, 2), 1);
 	if (!(is_ber(arg, ".ber")))
-		return (ft_putstr_fd("Error\n", 2), 1);
+		return (ft_putstr_fd(ERR_FI, 2), 1);
 	mlx->inputs.line = get_next_line(mlx->inputs.fd);
 	if (!mlx->inputs.line)
-		return (ft_putstr_fd("Error\n", 2), 1);
+		return (ft_putstr_fd(ERR_FD, 2), 1);
 	mlx->map.col = ft_strlen(mlx->inputs.line) - 1;
 	if (!check_char(mlx->inputs.line, &mlx->inputs, mlx->map.col))
-		return (free(mlx->inputs.line), ft_putstr_fd("Error\n", 2), 1);
+		return (free(mlx->inputs.line), ft_putstr_fd(ERR_MA, 2), 1);
 	free(mlx->inputs.line);
 	while (1)
 	{
@@ -89,7 +89,7 @@ int	first_check(t_mlx *mlx, char *arg)
 		mlx->map.check = ft_strlen(mlx->inputs.line);
 		if (is_rectangle(&mlx->inputs, mlx->map.col, mlx->map.check)
 			&& (!check_char(mlx->inputs.line, &mlx->inputs, mlx->map.col)))
-			return (free(mlx->inputs.line), ft_putstr_fd("Error\n", 2), 1);
+			return (free(mlx->inputs.line), ft_putstr_fd(ERR_MA, 2), 1);
 		mlx->map.row++;
 		free(mlx->inputs.line);
 	}

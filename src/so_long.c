@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 15:01:14 by hlichten          #+#    #+#             */
-/*   Updated: 2025/03/26 16:39:23 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/03/27 17:13:50 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void	mlx_init_sl(t_mlx *mlx)
 int	last_check(t_mlx *mlx)
 {
 	if (check_wall(mlx) == 1)
-		return (ft_putstr_fd("Error\n", 2), 1);
+		return (ft_putstr_fd(ERR_MA, 2), 1);
 	pos_player(mlx);
 	if (check_path(mlx) == 1)
-		return (ft_putstr_fd("Error\n", 2), 1);
+		return (ft_putstr_fd(ERR_PA, 2), 1);
 	return (0);
 }
 
@@ -52,7 +52,7 @@ int	main(int ac, char **av)
 		if (first_check(&mlx, av[1]) == 1)
 			return (1);
 		if (!check_count(&mlx))
-			return (ft_putstr_fd("Error\n", 2), 1);
+			return (ft_putstr_fd(ERR_DB, 2), 1);
 		close(mlx.inputs.fd);
 		malloc_map(av[1], &mlx);
 		if (last_check(&mlx) == 1)

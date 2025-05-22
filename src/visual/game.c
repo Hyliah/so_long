@@ -6,7 +6,7 @@
 /*   By: hlichten <hlichten@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:13:30 by hlichten          #+#    #+#             */
-/*   Updated: 2025/03/26 19:05:16 by hlichten         ###   ########.fr       */
+/*   Updated: 2025/03/27 15:40:23 by hlichten         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	count_move(void)
 	static int	count = 1;
 
 	if (count == 1)
-		ft_printf("Waf waf %d step, I want my treats 🐷\n", count);
+		ft_printf("Waf waf %dst step, I want my treats 🐷\n", count);
 	else if (count == 10)
 		ft_printf("Waf waf I already walked : %d steps 👟\n", count);
 	else if (count == 21)
